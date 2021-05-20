@@ -21,7 +21,6 @@ public class ConexaoDB {
                     usuario, // Usuario
                     senha // Senha
             );
-
             return con;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco de dados");

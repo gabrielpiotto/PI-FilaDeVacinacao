@@ -18,6 +18,9 @@ public class LoginTela extends javax.swing.JFrame {
      */
     public LoginTela() {
         initComponents();
+        
+        // Centralizar tela de login:
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -45,6 +48,11 @@ public class LoginTela extends javax.swing.JFrame {
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntrarActionPerformed(evt);
+            }
+        });
+        btnEntrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnEntrarKeyPressed(evt);
             }
         });
 
@@ -103,6 +111,10 @@ public class LoginTela extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void btnEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnEntrarKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEntrarKeyPressed
 
     /**
      * @param args the command line arguments
