@@ -1,16 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author gabri
- */
 public class LoginTela extends javax.swing.JFrame {
 
     /**
@@ -18,7 +8,7 @@ public class LoginTela extends javax.swing.JFrame {
      */
     public LoginTela() {
         initComponents();
-        
+
         // Centralizar tela de login:
         this.setLocationRelativeTo(null);
     }
@@ -90,14 +80,14 @@ public class LoginTela extends javax.swing.JFrame {
         // pegar os dados informados:
         String nome = txtUsuario.getText();
         String senha = String.valueOf(txtSenha.getPassword());
-        
+
         // Preparar para conectar:
         try {
             // Criando um objeto do tipo usuario
             Usuario u = new Usuario();
             u.setUsuario(nome);
             u.setSenha(senha);
-            
+
             // Criando um usuarioDAO para manusear os dados
             UsuarioDAO uDAO = new UsuarioDAO();
             if (uDAO.existe(u)) {
@@ -105,7 +95,7 @@ public class LoginTela extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario invalido!");
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Problemas tecnicos, tente mais tarde");
             e.printStackTrace();
