@@ -13,5 +13,7 @@ public class Main {
         Usuario u = new Usuario("gabriel", "admin");
 
         System.out.println(uDAO.existe(u));
+        
+        
     }
 }
