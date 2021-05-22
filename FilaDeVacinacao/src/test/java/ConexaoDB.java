@@ -17,6 +17,7 @@ public class ConexaoDB {
     public static Connection getConexao() {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + porta + "/" + db, usuario, senha);
+            System.out.println("Conectado..");
             return con;
 
         } catch (Exception e) {
