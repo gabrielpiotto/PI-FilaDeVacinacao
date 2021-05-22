@@ -8,7 +8,7 @@ public class Usuario {
 
     // Métodos:
     /**
-     * Constroi um objero do tipo Usuario vazio.
+     * Constroi um objeto do tipo Usuario vazio.
      */
     public Usuario() {
     }

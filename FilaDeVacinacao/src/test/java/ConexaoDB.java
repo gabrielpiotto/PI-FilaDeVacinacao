@@ -14,14 +14,11 @@ public class ConexaoDB {
     /**
      * Obter conexão com o banco de dados
      */
-    public static Connection obtemConexao() {
+    public static Connection getConexao() {
         try {
-            Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://" + host + ":" + porta + "/" + db, // Endereço (URL)
-                    usuario, // Usuario
-                    senha // Senha
-            );
+            Connection con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + porta + "/" + db, usuario, senha);
             return con;
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco de dados");
             e.printStackTrace();

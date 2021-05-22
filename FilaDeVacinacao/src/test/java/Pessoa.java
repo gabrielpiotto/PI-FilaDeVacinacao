@@ -1,17 +1,23 @@
 
 public class Pessoa {
 
+    // Atributos
     private String nome;
     private String endereco;
     private String dataVacinacao;
-    private int idade;
     private boolean areaSaude;
+    private int id;
+    private int idade;
 
+    // Métodos
+    /**
+     * Constroi um objeto do tipo Pessoa vazio
+     */
     public Pessoa() {
     }
 
     /**
-     * Construtor para Pessoas
+     * Constroi um objeto do tipo pessoa com valores iniciais
      *
      * @param nome
      * @param endereco
@@ -20,13 +26,29 @@ public class Pessoa {
      */
     public Pessoa(String nome, String endereco, int idade, boolean areaSaude) {
         this.nome = nome;
-        this.idade = idade;
         this.endereco = endereco;
         this.areaSaude = areaSaude;
+        this.idade = idade;
         this.dataVacinacao = null;
     }
 
-    // Getters e Setters:
+    /**
+     * Constroi um objeto do tipo pessoa com valores iniciais
+     *
+     * @param nome
+     * @param endereco
+     * @param idade
+     * @param areaSaude
+     * @param dataVacinacao
+     */
+    public Pessoa(String nome, String endereco, int idade, boolean areaSaude, String dataVacinacao) {
+        this.nome = nome;
+        this.endereco = endereco;
+        this.areaSaude = areaSaude;
+        this.idade = idade;
+        this.dataVacinacao = dataVacinacao;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -43,6 +65,22 @@ public class Pessoa {
         this.endereco = endereco;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isAreaSaude() {
+        return areaSaude;
+    }
+
+    public void setAreaSaude(boolean areaSaude) {
+        this.areaSaude = areaSaude;
+    }
+
     public String getDataVacinacao() {
         return dataVacinacao;
     }
@@ -57,14 +95,6 @@ public class Pessoa {
 
     public void setIdade(int idade) {
         this.idade = idade;
-    }
-
-    public boolean isAreaSaude() {
-        return areaSaude;
-    }
-
-    public void setAreaSaude(boolean areaSaude) {
-        this.areaSaude = areaSaude;
     }
 
 }
