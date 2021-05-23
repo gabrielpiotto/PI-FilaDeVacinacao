@@ -17,7 +17,7 @@ public class UsuarioDAO {
     public void cadastrarUsuario(Usuario usuario) {
 
         // 1° passo: criar comando SQL:
-        String sql = "INSERT INTO tb_usuario (usuario, senha) VALUES (?, ?)";
+        String sql = "INSERT INTO tb_usuario (usuario, senha, nivelAcesso) VALUES (?, ?, ?)";
 
         // 2° passo: abrir uma conexão com o bancode dados:
         try {
@@ -27,8 +27,9 @@ public class UsuarioDAO {
             PreparedStatement pst = con.prepareStatement(sql);
 
             // 4° passo: preencher todas as interrogações:
-            pst.setString(0, usuario.getUsuario());
-            pst.setString(1, usuario.getSenha());
+            pst.setString(1, usuario.getUsuario());
+            pst.setString(2, usuario.getSenha());
+            pst.setString(3, usuario.getNivelAcesso());
 
             // 5° passo: executar
             pst.execute();
@@ -60,9 +61,10 @@ public class UsuarioDAO {
                 int id = rs.getInt("id");
                 String usuario = rs.getString("usuario");
                 String senha = rs.getString("senha");
+                String nivelAcesso = rs.getString("nivelAcesso");
 
-                // Formatantdp para exibição:
-                String s = String.format("ID: $d\nUsuario: %s\nSenha: %s",id , usuario, senha);
+                // Formatando para exibição:
+                String s = String.format("ID: $d\nUsuario: %s\nSenha: %s\nNivel de Acesso: %s",id , usuario, senha, nivelAcesso);
                 JOptionPane.showMessageDialog(null, s);
             }
 
@@ -74,7 +76,7 @@ public class UsuarioDAO {
     // UPDATE: Atualiza os registros da tabela 'tb_usuario' 
     public void atualizarUsuario(Usuario usuario) {
         // 1°..
-        String sql = "UPDATE tb_usuario SET usuario = ?, senha = ? WHERE id = ?";
+        String sql = "UPDATE tb_usuario SET usuario = ?, senha = ?, nivelAcesso = ? WHERE id = ?";
         
         // 2°..
         try {
@@ -84,9 +86,10 @@ public class UsuarioDAO {
             PreparedStatement pst = con.prepareStatement(sql);
             
             // 4° passo: preencher todas as interrogações:
-            pst.setString(0, usuario.getUsuario());
-            pst.setString(1, usuario.getSenha());
-            pst.setInt(2, usuario.getId());
+            pst.setString(1, usuario.getUsuario());
+            pst.setString(2, usuario.getSenha());
+            pst.setString(3, usuario.getNivelAcesso());
+            pst.setInt(4, usuario.getId());
             
             // 5°..
             pst.execute();
@@ -109,7 +112,7 @@ public class UsuarioDAO {
             PreparedStatement pst = con.prepareStatement(sql);
             
             // 4°..
-            pst.setInt(0, usuario.getId());
+            pst.setInt(1, usuario.getId());
         } catch (Exception e) {
         }
     }

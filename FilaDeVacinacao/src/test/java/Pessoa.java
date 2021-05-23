@@ -5,9 +5,9 @@ public class Pessoa {
     private String nome;
     private String endereco;
     private String dataVacinacao;
-    private boolean areaSaude;
+    private String areaSaude;
     private int id;
-    private int idade;
+    private String idade;
 
     // Métodos
     /**
@@ -24,7 +24,7 @@ public class Pessoa {
      * @param idade
      * @param areaSaude
      */
-    public Pessoa(String nome, String endereco, int idade, boolean areaSaude) {
+    public Pessoa(String nome, String endereco, String idade, String areaSaude) {
         this.nome = nome;
         this.endereco = endereco;
         this.areaSaude = areaSaude;
@@ -41,7 +41,7 @@ public class Pessoa {
      * @param areaSaude
      * @param dataVacinacao
      */
-    public Pessoa(String nome, String endereco, int idade, boolean areaSaude, String dataVacinacao) {
+    public Pessoa(String nome, String endereco, String idade, String areaSaude, String dataVacinacao) {
         this.nome = nome;
         this.endereco = endereco;
         this.areaSaude = areaSaude;
@@ -73,11 +73,11 @@ public class Pessoa {
         this.id = id;
     }
 
-    public boolean isAreaSaude() {
+    public String getAreaSaude() {
         return areaSaude;
     }
 
-    public void setAreaSaude(boolean areaSaude) {
+    public void setAreaSaude(String areaSaude) {
         this.areaSaude = areaSaude;
     }
 
@@ -89,11 +89,11 @@ public class Pessoa {
         this.dataVacinacao = dataVacinacao;
     }
 
-    public int getIdade() {
+    public String getIdade() {
         return idade;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(String idade) {
         this.idade = idade;
     }
 

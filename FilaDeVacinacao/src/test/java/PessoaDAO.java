@@ -21,10 +21,10 @@ public class PessoaDAO {
             PreparedStatement pst = con.prepareStatement(sql);
 
             // 4° passo: preencher todas as interrogações:
-            pst.setString(0, pessoa.getNome());
-            pst.setString(1, pessoa.getEndereco());
-            pst.setInt(2, pessoa.getIdade());
-            pst.setBoolean(3, pessoa.isAreaSaude());
+            pst.setString(1, pessoa.getNome());
+            pst.setString(2, pessoa.getEndereco());
+            pst.setString(3, pessoa.getIdade());
+            pst.setString(4, pessoa.getAreaSaude());
 
             // 5° passo: executar
             pst.execute();
@@ -57,11 +57,11 @@ public class PessoaDAO {
                 String nome = rs.getString("nome");
                 int idade = rs.getInt("idade");
                 String endereco = rs.getString("endereco");
-                boolean areaSaude = rs.getBoolean("areaSaude");
+                String areaSaude = rs.getString("areaSaude");
                 String dataVacinacao = rs.getString("dataVacinacao");
 
                 // Formatantdp para exibição:
-                String s = String.format("ID: $d\nNome: %s\nIdade: %d\nEndereço: %s\nArea Saude: %b"
+                String s = String.format("ID: $d\nNome: %d\nIdade: %d\nEndereço: %s\nArea Saude: %d"
                         + "\nData de vacinação: %s", id, nome, idade, endereco, areaSaude, dataVacinacao);
                 JOptionPane.showMessageDialog(null, s);
             }
@@ -84,12 +84,12 @@ public class PessoaDAO {
             PreparedStatement pst = con.prepareStatement(sql);
 
             // 4° passo: preencher todas as interrogações:
-            pst.setString(0, pessoa.getNome());
-            pst.setInt(1, pessoa.getIdade());
-            pst.setBoolean(2, pessoa.isAreaSaude());
-            pst.setString(3, pessoa.getEndereco());
-            pst.setString(4, pessoa.getDataVacinacao());
-            pst.setInt(5, pessoa.getId());
+            pst.setString(1, pessoa.getNome());
+            pst.setString(2, pessoa.getIdade());
+            pst.setString(3, pessoa.getAreaSaude());
+            pst.setString(4, pessoa.getEndereco());
+            pst.setString(5, pessoa.getDataVacinacao());
+            pst.setInt(6, pessoa.getId());
 
             // 5°..
             pst.execute();
@@ -112,7 +112,7 @@ public class PessoaDAO {
             PreparedStatement pst = con.prepareStatement(sql);
 
             // 4°..
-            pst.setInt(0, pessoa.getId());
+            pst.setInt(1, pessoa.getId());
         } catch (Exception e) {
         }
     }
@@ -132,7 +132,7 @@ public class PessoaDAO {
 
             // Preenchendo os '?':
             pst.setString(1, pessoa.getNome());
-            pst.setInt(2, pessoa.getIdade());
+            pst.setString(2, pessoa.getIdade());
 
             // Executando o comando 'SELECT' e recebendo o retorno:
             ResultSet resultado = pst.executeQuery();

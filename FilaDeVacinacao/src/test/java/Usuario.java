@@ -5,6 +5,7 @@ public class Usuario {
     private int id;
     private String usuario;
     private String senha;
+    private String nivelAcesso;
 
     // Métodos:
     /**
@@ -27,14 +28,29 @@ public class Usuario {
     /**
      * Constroi um objeto do tipo Usuario com valores iniciais
      *
+     * @param usuario
+     * @param senha
+     * @param nivelAcesso
+     */
+    public Usuario(String usuario, String senha, String nivelAcesso) {
+        this.usuario = usuario;
+        this.senha = senha;
+        this.nivelAcesso = nivelAcesso;
+    }
+
+    /**
+     * Constroi um objeto do tipo Usuario com valores iniciais
+     *
      * @param id
      * @param usuario
      * @param senha
+     * @param nivelAcesso
      */
-    public Usuario(int id, String usuario, String senha) {
+    public Usuario(int id, String usuario, String senha, String nivelAcesso) {
         this.id = id;
         this.usuario = usuario;
         this.senha = senha;
+        this.nivelAcesso = nivelAcesso;
     }
 
     // Getters e Setters:
@@ -62,4 +78,11 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public String getNivelAcesso() {
+        return nivelAcesso;
+    }
+
+    public void setNivelAcesso(String nivelAcesso) {
+        this.nivelAcesso = nivelAcesso;
+    }
 }
