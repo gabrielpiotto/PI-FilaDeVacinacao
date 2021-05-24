@@ -10,7 +10,10 @@ public class Main {
         con.getConexao();
         // ok
         
-        // 
+        // Existe?
+        Usuario p = new Usuario("admin", "admin0");
+        UsuarioDAO u = new UsuarioDAO();
+        u.existeUsuario(p);
         
     }
 }

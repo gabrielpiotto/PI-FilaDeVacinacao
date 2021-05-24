@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 public class UsuarioDAO {
 
     // CRUD Usuario:
-    
     // CREATE: Insere novos registros na tabela 'tb_usuario'
     public void cadastrarUsuario(Usuario usuario) {
 
@@ -64,7 +63,7 @@ public class UsuarioDAO {
                 String nivelAcesso = rs.getString("nivelAcesso");
 
                 // Formatando para exibição:
-                String s = String.format("ID: $d\nUsuario: %s\nSenha: %s\nNivel de Acesso: %s",id , usuario, senha, nivelAcesso);
+                String s = String.format("ID: $d\nUsuario: %s\nSenha: %s\nNivel de Acesso: %s", id, usuario, senha, nivelAcesso);
                 JOptionPane.showMessageDialog(null, s);
             }
 
@@ -72,45 +71,45 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
     }
-    
+
     // UPDATE: Atualiza os registros da tabela 'tb_usuario' 
     public void atualizarUsuario(Usuario usuario) {
         // 1°..
         String sql = "UPDATE tb_usuario SET usuario = ?, senha = ?, nivelAcesso = ? WHERE id = ?";
-        
+
         // 2°..
         try {
             Connection con = ConexaoDB.getConexao();
-            
+
             // 3°..
             PreparedStatement pst = con.prepareStatement(sql);
-            
+
             // 4° passo: preencher todas as interrogações:
             pst.setString(1, usuario.getUsuario());
             pst.setString(2, usuario.getSenha());
             pst.setString(3, usuario.getNivelAcesso());
             pst.setInt(4, usuario.getId());
-            
+
             // 5°..
             pst.execute();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
     // DELETE:
     public void apagarUsuario(Usuario usuario) {
         // 1°..
         String sql = "DELETE FROM tb_usuario WHERE id = ?";
-        
+
         // 2°..
         try {
             Connection con = ConexaoDB.getConexao();
-            
+
             // 3°..
             PreparedStatement pst = con.prepareStatement(sql);
-            
+
             // 4°..
             pst.setInt(1, usuario.getId());
         } catch (Exception e) {
