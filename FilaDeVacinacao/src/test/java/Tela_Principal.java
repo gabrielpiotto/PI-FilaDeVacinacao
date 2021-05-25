@@ -15,25 +15,21 @@ public class Tela_Principal extends javax.swing.JFrame {
      */
     public Tela_Principal(String nivelAcesso) {
         initComponents();
-        lblNivelAcesso.setText(nivelAcesso);
 
         // Centralizar tela:
         this.setLocationRelativeTo(null);
-
-        // Ocultar painel ao iniciar:
-        //painelFila.setVisible(false);
-        painelFila.setVisible(false);
     }
 
-    Tela_Principal() {
+    public Tela_Principal() {
         initComponents();
 
         // Centralizar tela:
         this.setLocationRelativeTo(null);
+    }
 
-        // Ocultar painel ao iniciar:
-        //painelFila.setVisible(false);
-        tb_fila.setVisible(false);
+    private void isAdmin(String nivelAcesso) {
+
+        lblNivelAcesso.setText(nivelAcesso);
     }
 
     /**
