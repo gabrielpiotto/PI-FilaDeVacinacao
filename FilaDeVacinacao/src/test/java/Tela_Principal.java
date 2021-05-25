@@ -22,7 +22,7 @@ public class Tela_Principal extends javax.swing.JFrame {
 
         // Ocultar painel ao iniciar:
         //painelFila.setVisible(false);
-        tb_fila.setVisible(false);
+        painelFila.setVisible(false);
     }
 
     Tela_Principal() {
