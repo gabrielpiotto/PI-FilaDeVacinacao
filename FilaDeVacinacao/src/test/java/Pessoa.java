@@ -7,13 +7,25 @@ public class Pessoa {
     private String dataVacinacao;
     private String areaSaude;
     private int id;
-    private String idade;
+    private int idade;
 
     // Métodos
     /**
      * Constroi um objeto do tipo Pessoa vazio
      */
     public Pessoa() {
+    }
+
+    public Pessoa(int id) {
+        this.id = id;
+    }
+
+    public Pessoa(String nome, String endereco, String areaSaude, int id, int idade) {
+        this.nome = nome;
+        this.endereco = endereco;
+        this.areaSaude = areaSaude;
+        this.id = id;
+        this.idade = idade;
     }
 
     /**
@@ -24,7 +36,7 @@ public class Pessoa {
      * @param idade
      * @param areaSaude
      */
-    public Pessoa(String nome, String endereco, String idade, String areaSaude) {
+    public Pessoa(String nome, String endereco, int idade, String areaSaude) {
         this.nome = nome;
         this.endereco = endereco;
         this.areaSaude = areaSaude;
@@ -41,7 +53,7 @@ public class Pessoa {
      * @param areaSaude
      * @param dataVacinacao
      */
-    public Pessoa(String nome, String endereco, String idade, String areaSaude, String dataVacinacao) {
+    public Pessoa(String nome, String endereco, int idade, String areaSaude, String dataVacinacao) {
         this.nome = nome;
         this.endereco = endereco;
         this.areaSaude = areaSaude;
@@ -89,12 +101,17 @@ public class Pessoa {
         this.dataVacinacao = dataVacinacao;
     }
 
-    public String getIdade() {
+    public int getIdade() {
         return idade;
     }
 
-    public void setIdade(String idade) {
+    public void setIdade(int idade) {
         this.idade = idade;
+    }
+
+    @Override
+    public String toString() {
+        return "|ID: " + id + " | Nome: " + nome + " | Idade: " + idade + " |";
     }
 
 }

@@ -174,7 +174,7 @@ public class Tela_CadastroPessoa extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // Coletar dados dos campos:
         String nome = txtNome.getText();
-        String idade = txtIdade.getText();
+        int idade = Integer.parseInt(txtIdade.getText());
         String endereco = txtEndereco.getText();
         String areaSaude;
         if (campoAreaSaude.isEnabled()) {

@@ -213,7 +213,7 @@ public class Tela_Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Bem vindo " + u.getUsuario());
 
                 // Mostrar Tela Principal:
-                new Tela_Principal(u).setVisible(true);
+                new Tela_Principal().setVisible(true);
 
                 // fechar a janela após o login:
                 this.dispose();
