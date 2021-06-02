@@ -76,7 +76,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="739" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="738" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -255,7 +255,12 @@
                       <Font name="Arial" size="14" style="1"/>
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="0"/>
+                      <StringArray count="4">
+                        <StringItem index="0" value="At&#xe9; 49 anos"/>
+                        <StringItem index="1" value="Entre 50 e 69 anos"/>
+                        <StringItem index="2" value="Entre 70 e 80 anos"/>
+                        <StringItem index="3" value="Maior ou igual a 90 anos"/>
+                      </StringArray>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -312,7 +317,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton1" pref="211" max="32767" attributes="0"/>
+                              <Component id="jButton1" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
