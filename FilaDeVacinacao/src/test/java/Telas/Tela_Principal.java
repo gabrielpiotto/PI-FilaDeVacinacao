@@ -176,6 +176,11 @@ public class Tela_Principal extends javax.swing.JFrame {
         });
 
         btnRelatorio.setText("Relatorio");
+        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout painelAdmLayout = new javax.swing.GroupLayout(painelAdm);
         painelAdm.setLayout(painelAdmLayout);
@@ -311,14 +316,16 @@ public class Tela_Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilaActionPerformed
-
+        
         // Visibilidade da fila:
         if (painelTabela.isVisible()) {
             painelTabela.setVisible(false);
             btnFila.setText("Mostrar Fila");
+            readTabela();
         } else {
             painelTabela.setVisible(true);
             btnFila.setText("Ocultar Fila");
+            readTabela();
         }
     }//GEN-LAST:event_btnFilaActionPerformed
 
@@ -334,6 +341,10 @@ public class Tela_Principal extends javax.swing.JFrame {
     private void btnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioActionPerformed
         new Tela_GerenciarUsuario().setVisible(true);
     }//GEN-LAST:event_btnUsuarioActionPerformed
+
+    private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
+        new Tela_Relatorio().setVisible(true);
+    }//GEN-LAST:event_btnRelatorioActionPerformed
 
     /**
      * @param args the command line arguments

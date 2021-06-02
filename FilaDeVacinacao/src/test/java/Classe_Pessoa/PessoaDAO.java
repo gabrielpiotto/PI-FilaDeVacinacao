@@ -29,6 +29,7 @@ public class PessoaDAO {
             pst.setString(4, pessoa.getAreaSaude());
 
             // 5° passo: executar
+            System.out.println("Cadastrando..");
             pst.execute();
         }
     }
@@ -85,24 +86,25 @@ public class PessoaDAO {
 
             // 5°..
             pst.execute();
-
+            System.out.println("Atualizando..");
         }
     }
 
     // DELETE:
-    public void apagarPessoa(Pessoa pessoa) throws Exception {
+    public void apagarPessoa(Pessoa p) throws Exception {
         // 1°..
-        String sql = "DELETE FROM tb_pessoa WHERE id = ?";
+        //String sql = "DELETE FROM tb_pessoa WHERE id = ?";
 
         // 2°..
         try (Connection con = ConexaoDB.getConexao();
                 // 3°..
-                PreparedStatement pst = con.prepareStatement(sql)) {
+                PreparedStatement pst = con.prepareStatement("DELETE FROM tb_pessoa WHERE id = ?")) {
 
             // 4°..
-            pst.setInt(1, pessoa.getId());
+            pst.setInt(1, p.getId());
             
             pst.execute();
+            System.out.println("Deletando..");
         }
     }
 

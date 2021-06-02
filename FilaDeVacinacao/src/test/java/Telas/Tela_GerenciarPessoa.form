@@ -130,11 +130,11 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="txtIdade" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtEndereco" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtSaude" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtData" max="32767" attributes="0"/>
                           <Component id="jPanel3" max="32767" attributes="0"/>
+                          <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" pref="659" max="32767" attributes="0"/>
@@ -317,10 +317,10 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnCadastrar" pref="193" max="32767" attributes="0"/>
                               <Component id="btnExcluir" max="32767" attributes="0"/>
-                              <Component id="btnAtualizar" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnAtualizar" alignment="0" pref="193" max="32767" attributes="0"/>
                               <Component id="btnVoltar" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnCadastrar" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>

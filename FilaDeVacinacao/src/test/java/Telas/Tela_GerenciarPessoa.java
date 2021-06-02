@@ -191,10 +191,10 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -219,11 +219,11 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtIdade)
-                    .addComponent(txtNome)
                     .addComponent(txtEndereco)
                     .addComponent(txtSaude)
                     .addComponent(txtData)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
                 .addContainerGap())
@@ -336,6 +336,7 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
                 txtData.setText("");
 
                 readTabela();
+                
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -376,6 +377,7 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
 
                     } else {
                         JOptionPane.showMessageDialog(this, "Preencha o campo 'Área Saúde' corretamente");
+                        return;
                     }
 
                     Pessoa p = new Pessoa(id, nome, endereco, idade, areaSaude, dataVacinacao);
@@ -405,15 +407,15 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
         UIManager.put("OptionPane.cancelButtonText", "Cancelar");
 
         try {
-            int escolha = JOptionPane.showConfirmDialog(this, "Deseja mesmo apagar " + txtNome.getText() + " ?");
+            int escolha = JOptionPane.showConfirmDialog(this, "Deseja mesmo apagar o usuario " + txtNome.getText() + " ?");
             if (escolha == JOptionPane.YES_OPTION) {
                 if (tabelaPessoas.getSelectedRow() != -1) {
-                    Usuario u = new Usuario();
-                    UsuarioDAO uDAO = new UsuarioDAO();
+                    Pessoa p = new Pessoa();
+                    PessoaDAO pDAO = new PessoaDAO();
 
-                    u.setId((int) tabelaPessoas.getValueAt(tabelaPessoas.getSelectedRow(), 0));
+                    p.setId((int) tabelaPessoas.getValueAt(tabelaPessoas.getSelectedRow(), 0));
 
-                    uDAO.apagarUsuario(u);
+                    pDAO.apagarPessoa(p);
 
                     // Limpar os campos e Atualizando tabela:
                     txtNome.setText("");
