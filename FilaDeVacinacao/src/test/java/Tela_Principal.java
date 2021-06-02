@@ -1,6 +1,3 @@
-
-import javax.swing.JOptionPane;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -19,19 +16,6 @@ public class Tela_Principal extends javax.swing.JFrame {
     public Tela_Principal() {
         initComponents();
         tabelaFila.setVisible(false);
-    }
-    public Tela_Principal(Pessoa p) {
-        
-        super ("Tabela Pessoas");
-        initComponents();
-        setLocationRelativeTo(null);
-        try {
-          this.tabelaFila.setModel(new PessoaTableModel(p));
-        }
- catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Falha técnica. Tente novamente  mais tarde.");
-        }
     }
 
     /**
@@ -104,6 +88,7 @@ public class Tela_Principal extends javax.swing.JFrame {
         lblNivelAcesso.setText("Nivel De Acesso");
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gabriel Piotto\\Documents\\NetBeansProjects\\PI-FilaDeVacinacao\\Imagens\\user-128.png")); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -194,13 +179,13 @@ public class Tela_Principal extends javax.swing.JFrame {
 
         tabelaFila.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "id", "nome", "idade", "areaSaude", "endereco", "dataVacinacao"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
         painelTabela.setViewportView(tabelaFila);
