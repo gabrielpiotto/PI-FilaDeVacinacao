@@ -1,9 +1,12 @@
 package Classe_Pessoa;
 
-
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
+/**
+ *
+ * @author Gabriel Piotto
+ */
 public class PessoaTableModel extends AbstractTableModel {
 
     private List<Pessoa> pessoa;

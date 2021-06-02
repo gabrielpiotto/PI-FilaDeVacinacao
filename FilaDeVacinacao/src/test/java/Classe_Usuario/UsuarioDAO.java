@@ -1,19 +1,24 @@
 package Classe_Usuario;
 
-
 import Core.ConexaoDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
- * Classe que manipula objetos (CRUD) do Java e registros MySQL do tipo
- * 'Usuario'.
  *
+ * @author Gabriel Piotto
  */
 public class UsuarioDAO {
 
+    /**
+     * Classe que manipula objetos (CRUD) do Java e registros MySQL do tipo
+     * 'Usuario'.
+     *
+     */
     // CRUD Usuario:
     // CREATE: Insere novos registros na tabela 'tb_usuario'
     public void cadastrarUsuario(Usuario usuario) throws Exception {
@@ -121,5 +126,59 @@ public class UsuarioDAO {
             // Tenta acessar os resultados:
             return resultado.next();
         }
+    }
+
+    public Usuario[] getUsuario() throws Exception {
+        String sql = "SELECT * FROM tb_usuario";
+
+        try (Connection con = ConexaoDB.getConexao();
+                PreparedStatement pst = con.prepareStatement(sql,
+                        ResultSet.TYPE_SCROLL_INSENSITIVE, // Indica que esse objeto é navegavel e não é sensivel a mudanças
+                        ResultSet.CONCUR_READ_ONLY)) { // Não pode ser alterado enquanto estiver sendo usado
+            ResultSet rs = pst.executeQuery();
+
+            // Tem elementos na tabela ? se sim quero a linha que vc parou : senão devolve 0                
+            int totalDeUsuarios = rs.last() ? rs.getRow() : 0;
+
+            // Instanciando o vetor:
+            Usuario[] u = new Usuario[totalDeUsuarios];
+
+            // Volta pro inicio da tabela:
+            rs.beforeFirst();
+
+            // Buscando dados na tabela e armazenando nas variaveis locais:
+            int contador = 0;
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String usuario = rs.getString("usuario");
+                String senha = rs.getString("senha");
+                String nivelAcesso = rs.getString("nivelAcesso");
+                u[contador] = new Usuario(id, usuario, senha, nivelAcesso);
+                contador++;
+            }
+            // Retornar os dados buscados:
+            return u;
+        }
+    }
+
+    public List<Usuario> buscarUsuario(Usuario u) throws Exception {
+        String sql = "SELECT id, usuario, senha, nivelAcesso FROM tb_usuario";
+
+        List<Usuario> usuarios = new ArrayList<>();
+
+        try (Connection con = ConexaoDB.getConexao();
+                PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setInt(1, u.getId());
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String usuario = rs.getString("usuario");
+                    String senha = rs.getString("senha");
+                    String nivelAcesso = rs.getString("nivelAcesso");
+                    usuarios.add(new Usuario(id, usuario, senha, nivelAcesso));
+                }
+            }
+        }
+        return usuarios;
     }
 }

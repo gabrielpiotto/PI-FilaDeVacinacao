@@ -1,6 +1,5 @@
 package Classe_Usuario;
 
-
 public class Usuario {
 
     // Atributos:

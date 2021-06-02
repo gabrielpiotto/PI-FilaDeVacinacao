@@ -206,7 +206,7 @@ public class Tela_Login extends javax.swing.JFrame {
             Usuario u = new Usuario();
             u.setUsuario(usuario);
             u.setSenha(senha);
-
+            
             // Criando um usuarioDAO para manusear os dados
             UsuarioDAO uDAO = new UsuarioDAO();
 
