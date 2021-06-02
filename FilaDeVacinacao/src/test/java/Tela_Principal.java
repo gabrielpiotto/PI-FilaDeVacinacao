@@ -15,6 +15,7 @@ public class Tela_Principal extends javax.swing.JFrame {
      */
     public Tela_Principal() {
         initComponents();
+        tabelaFila.setVisible(false);
     }
 
     /**
@@ -31,17 +32,18 @@ public class Tela_Principal extends javax.swing.JFrame {
         painelAtendente = new javax.swing.JPanel();
         btnVacinar = new javax.swing.JButton();
         btnFila = new javax.swing.JButton();
-        btnRelatorio = new javax.swing.JButton();
         painelID = new javax.swing.JPanel();
         lblNivelAcesso = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         painelAdm = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
+        btnPessoa = new javax.swing.JButton();
+        btnUsuario = new javax.swing.JButton();
+        btnRelatorio = new javax.swing.JButton();
         painelLogout = new javax.swing.JPanel();
         btnLogout = new javax.swing.JButton();
         painelTabela = new javax.swing.JScrollPane();
-        tabelaPessoa = new javax.swing.JTable();
+        tabelaFila = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,17 +60,13 @@ public class Tela_Principal extends javax.swing.JFrame {
             }
         });
 
-        btnRelatorio.setText("Gerar Relatorio");
-
         javax.swing.GroupLayout painelAtendenteLayout = new javax.swing.GroupLayout(painelAtendente);
         painelAtendente.setLayout(painelAtendenteLayout);
         painelAtendenteLayout.setHorizontalGroup(
             painelAtendenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelAtendenteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelAtendenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnVacinar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRelatorio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                .addComponent(btnVacinar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelAtendenteLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -80,9 +78,7 @@ public class Tela_Principal extends javax.swing.JFrame {
             .addGroup(painelAtendenteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnVacinar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnFila, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -122,7 +118,16 @@ public class Tela_Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton4.setText("Painel Admin");
+        btnPessoa.setText("Gerenciar Pessoas");
+        btnPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPessoaActionPerformed(evt);
+            }
+        });
+
+        btnUsuario.setText("Gerenciar Usuarios");
+
+        btnRelatorio.setText("Relatorio");
 
         javax.swing.GroupLayout painelAdmLayout = new javax.swing.GroupLayout(painelAdm);
         painelAdm.setLayout(painelAdmLayout);
@@ -130,14 +135,21 @@ public class Tela_Principal extends javax.swing.JFrame {
             painelAdmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelAdmLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(painelAdmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(btnUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         painelAdmLayout.setVerticalGroup(
             painelAdmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelAdmLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -165,18 +177,18 @@ public class Tela_Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tabelaPessoa.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaFila.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
-        painelTabela.setViewportView(tabelaPessoa);
+        painelTabela.setViewportView(tabelaFila);
 
         javax.swing.GroupLayout BaseLayout = new javax.swing.GroupLayout(Base);
         Base.setLayout(BaseLayout);
@@ -184,13 +196,14 @@ public class Tela_Principal extends javax.swing.JFrame {
             BaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BaseLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(BaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(painelID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(painelLogout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(painelAtendente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(painelAdm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(BaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(BaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(painelID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(painelLogout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(painelAtendente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(painelAdm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(painelTabela, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
+                .addComponent(painelTabela, javax.swing.GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)
                 .addContainerGap())
         );
         BaseLayout.setVerticalGroup(
@@ -198,7 +211,7 @@ public class Tela_Principal extends javax.swing.JFrame {
             .addGroup(BaseLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(BaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(painelTabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(painelTabela)
                     .addGroup(BaseLayout.createSequentialGroup()
                         .addComponent(painelID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -206,8 +219,9 @@ public class Tela_Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(painelAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(painelAdm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(painelAdm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 96, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout FundoLayout = new javax.swing.GroupLayout(Fundo);
@@ -243,13 +257,25 @@ public class Tela_Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilaActionPerformed
-        // TODO add your handling code here:
+        
+        // Visibilidade da fila:
+        if (tabelaFila.isVisible()) {
+            tabelaFila.setVisible(false);
+            btnFila.setText("Mostrar Fila");
+        } else {
+            tabelaFila.setVisible(true);
+            btnFila.setText("Ocultar Fila");
+        }
     }//GEN-LAST:event_btnFilaActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         new Tela_Login().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPessoaActionPerformed
+        //new Tela_GerenciarPessoas().setVisible(true);
+    }//GEN-LAST:event_btnPessoaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,9 +317,10 @@ public class Tela_Principal extends javax.swing.JFrame {
     private javax.swing.JPanel Fundo;
     private javax.swing.JButton btnFila;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnPessoa;
     private javax.swing.JButton btnRelatorio;
+    private javax.swing.JButton btnUsuario;
     private javax.swing.JButton btnVacinar;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblNivelAcesso;
@@ -302,6 +329,6 @@ public class Tela_Principal extends javax.swing.JFrame {
     private javax.swing.JPanel painelID;
     private javax.swing.JPanel painelLogout;
     private javax.swing.JScrollPane painelTabela;
-    private javax.swing.JTable tabelaPessoa;
+    private javax.swing.JTable tabelaFila;
     // End of variables declaration//GEN-END:variables
 }
