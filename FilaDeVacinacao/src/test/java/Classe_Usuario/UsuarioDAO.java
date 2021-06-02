@@ -1,4 +1,7 @@
+package Classe_Usuario;
 
+
+import Core.ConexaoDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -1,4 +1,8 @@
+package Telas;
 
+
+import Classe_Pessoa.PessoaDAO;
+import Classe_Pessoa.Pessoa;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
