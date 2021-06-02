@@ -1,6 +1,5 @@
 package Classe_Pessoa;
 
-
 import Core.ConexaoDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -127,59 +126,29 @@ public class PessoaDAO {
         }
     }
 
-    public Pessoa[] getPessoa() throws Exception {
+    public List<Pessoa> read() throws Exception {
+
         String sql = "SELECT * FROM tb_pessoa";
 
+        List<Pessoa> pessoa = new ArrayList<>();
+
         try (Connection con = ConexaoDB.getConexao();
-                PreparedStatement pst = con.prepareStatement(sql,
-                        ResultSet.TYPE_SCROLL_INSENSITIVE, // Indica que esse objeto é navegavel e não é sensivel a mudanças
-                        ResultSet.CONCUR_READ_ONLY)) { // Não pode ser alterado enquanto estiver sendo usado
-            ResultSet rs = pst.executeQuery();
+                PreparedStatement pst = con.prepareStatement(sql)) {
 
-            // Tem elementos na tabela ? se sim quero a linha que vc parou : senão devolve 0                
-            int totalDePessoas = rs.last() ? rs.getRow() : 0;
-
-            // Instanciando o vetor:
-            Pessoa[] p = new Pessoa[totalDePessoas];
-
-            // Volta pro inicio da tabela:
-            rs.beforeFirst();
-
-            // Buscando dados na tabela e armazenando nas variaveis locais:
-            int contador = 0;
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String nome = rs.getString("nome");
-                String endereco = rs.getString("endereco");
-                int idade = rs.getInt("idade");
-                String areaSaude = rs.getString("areaSaude");
-                p[contador] = new Pessoa(nome, endereco, idade, areaSaude);
-                contador++;
-            }
-            // Retornar os dados buscados:
-            return p;
-        }
-    }
-
-    public List<Pessoa> buscarPessoa(Pessoa p) throws Exception {
-        String sql = "SELECT id, nome, endereco, idade, areaSaude FROM tb_pessoa";
-
-        List<Pessoa> alunos = new ArrayList<>();
-
-        try (Connection conexao = ConexaoDB.getConexao();
-                PreparedStatement ps = conexao.prepareStatement(sql)) {
-            ps.setInt(1, p.getId());
-            try (ResultSet rs = ps.executeQuery()) {
+            try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
-                    int id = rs.getInt("id");
-                    String nome = rs.getString("nome");
-                    String endereco = rs.getString("endereco");
-                    int idade = rs.getInt("idade");
-                    String areaSaude = rs.getString("areaSaude");
-                    alunos.add(new Pessoa(nome, endereco, areaSaude, id, idade));
+                    Pessoa p = new Pessoa();
+
+                    p.setId(rs.getInt("id"));
+                    p.setNome(rs.getString("nome"));
+                    p.setEndereco(rs.getString("endereco"));
+                    p.setIdade(rs.getInt("idade"));
+                    p.setAreaSaude(rs.getString("areaSaude"));
+                    p.setDataVacinacao(rs.getString("dataVacinacao"));
+                    pessoa.add(p);
                 }
             }
         }
-        return alunos;
+        return pessoa;
     }
 }

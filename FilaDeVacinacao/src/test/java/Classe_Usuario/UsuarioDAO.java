@@ -1,5 +1,6 @@
 package Classe_Usuario;
 
+import Classe_Pessoa.Pessoa;
 import Core.ConexaoDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -128,57 +129,50 @@ public class UsuarioDAO {
         }
     }
 
-    public Usuario[] getUsuario() throws Exception {
-        String sql = "SELECT * FROM tb_usuario";
+    // Saber se existe determinado usuario e senha no banco de dados
+    public boolean isAdmin(Usuario usuario) throws Exception {
 
+        // 1° passo: criar comando SQL:
+        String sql = "SELECT * FROM tb_usuario WHERE usuario = ? AND senha = ? AND nivelAcesso = ?";
+        // Obtendo conexão com o banco de dados
         try (Connection con = ConexaoDB.getConexao();
-                PreparedStatement pst = con.prepareStatement(sql,
-                        ResultSet.TYPE_SCROLL_INSENSITIVE, // Indica que esse objeto é navegavel e não é sensivel a mudanças
-                        ResultSet.CONCUR_READ_ONLY)) { // Não pode ser alterado enquanto estiver sendo usado
-            ResultSet rs = pst.executeQuery();
+                // pré-compilar o comando SQL (Segurança para seu banco de dados):
+                PreparedStatement pst = con.prepareStatement(sql)) {
 
-            // Tem elementos na tabela ? se sim quero a linha que vc parou : senão devolve 0                
-            int totalDeUsuarios = rs.last() ? rs.getRow() : 0;
+            // Preenchendo os '?':
+            pst.setString(1, usuario.getUsuario());
+            pst.setString(2, usuario.getSenha());
+            pst.setString(3, usuario.getNivelAcesso());
 
-            // Instanciando o vetor:
-            Usuario[] u = new Usuario[totalDeUsuarios];
+            // Executando o comando 'SELECT' e recebendo o retorno:
+            ResultSet resultado = pst.executeQuery();
 
-            // Volta pro inicio da tabela:
-            rs.beforeFirst();
-
-            // Buscando dados na tabela e armazenando nas variaveis locais:
-            int contador = 0;
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String usuario = rs.getString("usuario");
-                String senha = rs.getString("senha");
-                String nivelAcesso = rs.getString("nivelAcesso");
-                u[contador] = new Usuario(id, usuario, senha, nivelAcesso);
-                contador++;
-            }
-            // Retornar os dados buscados:
-            return u;
+            // Tenta acessar os resultados:
+            return resultado.next();
         }
     }
 
-    public List<Usuario> buscarUsuario(Usuario u) throws Exception {
-        String sql = "SELECT id, usuario, senha, nivelAcesso FROM tb_usuario";
+    public List<Usuario> read() throws Exception {
 
-        List<Usuario> usuarios = new ArrayList<>();
+        String sql = "SELECT * FROM tb_usuario";
+
+        List<Usuario> usuario = new ArrayList<>();
 
         try (Connection con = ConexaoDB.getConexao();
                 PreparedStatement pst = con.prepareStatement(sql)) {
-            pst.setInt(1, u.getId());
+
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
-                    int id = rs.getInt("id");
-                    String usuario = rs.getString("usuario");
-                    String senha = rs.getString("senha");
-                    String nivelAcesso = rs.getString("nivelAcesso");
-                    usuarios.add(new Usuario(id, usuario, senha, nivelAcesso));
+                    Usuario u = new Usuario();
+
+                    u.setId(rs.getInt("id"));
+                    u.setUsuario(rs.getString("usuario"));
+                    u.setSenha(rs.getString("senha"));
+                    u.setNivelAcesso(rs.getString("nivelAcesso"));
+                    usuario.add(u);
                 }
             }
         }
-        return usuarios;
+        return usuario;
     }
 }

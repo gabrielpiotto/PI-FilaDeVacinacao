@@ -1,6 +1,5 @@
 package Telas;
 
-
 import Classe_Usuario.Usuario;
 import Classe_Usuario.UsuarioDAO;
 import javax.swing.JOptionPane;
@@ -77,7 +76,7 @@ public class Tela_Login extends javax.swing.JFrame {
 
         painelMeio.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(80, 178, 215))); // NOI18N
 
         btnSair.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -98,7 +97,7 @@ public class Tela_Login extends javax.swing.JFrame {
             }
         });
 
-        txtSenha.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtSenha.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtSenha.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Senha", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(80, 178, 215))); // NOI18N
 
         checkBox.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -199,28 +198,30 @@ public class Tela_Login extends javax.swing.JFrame {
         // pegar os dados informados:
         String usuario = txtUsuario.getText();
         String senha = String.valueOf(txtSenha.getPassword());
-
+        String nivelAcesso = "Administrador";
         // Preparar para conectar:
         try {
             // Criando um objeto do tipo usuario
-            Usuario u = new Usuario();
-            u.setUsuario(usuario);
-            u.setSenha(senha);
-            
+            Usuario u = new Usuario(usuario, senha, nivelAcesso);
+
             // Criando um usuarioDAO para manusear os dados
             UsuarioDAO uDAO = new UsuarioDAO();
 
             // Verificação de usuario:
             if (uDAO.existeUsuario(u)) {
+                if (uDAO.isAdmin(u)) {
+                    JOptionPane.showMessageDialog(this, "Bem vindo " + u.getUsuario());
 
-                // Mensagem de boas vindas
-                JOptionPane.showMessageDialog(this, "Bem vindo " + u.getUsuario());
+                    new Tela_Principal("Administrador", usuario).setVisible(true);
 
-                // Mostrar Tela Principal:
-                new Tela_Principal().setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Bem vindo " + u.getUsuario());
 
-                // fechar a janela após o login:
-                this.dispose();
+                    new Tela_Principal("Atendente", usuario).setVisible(true);
+
+                    this.dispose();
+                }
 
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario/Senha invalido");
@@ -235,7 +236,7 @@ public class Tela_Login extends javax.swing.JFrame {
     private void checkBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxActionPerformed
         if (checkBox.isSelected()) {
             // Faz com que mostre a senha ao inves do '*':
-            txtSenha.setEchoChar((char)0);
+            txtSenha.setEchoChar((char) 0);
         } else {
             txtSenha.setEchoChar('*');
         }
