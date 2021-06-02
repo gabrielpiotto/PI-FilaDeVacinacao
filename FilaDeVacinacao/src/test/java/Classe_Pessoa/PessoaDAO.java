@@ -101,6 +101,8 @@ public class PessoaDAO {
 
             // 4°..
             pst.setInt(1, pessoa.getId());
+            
+            pst.execute();
         }
     }
 

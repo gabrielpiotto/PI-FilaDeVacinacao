@@ -44,6 +44,7 @@ public class Tela_Login extends javax.swing.JFrame {
         checkBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
         setResizable(false);
 
         Fundo.setBackground(new java.awt.Color(80, 178, 215));
@@ -56,6 +57,7 @@ public class Tela_Login extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(80, 178, 215));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Login");
+        jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(80, 178, 215), new java.awt.Color(80, 178, 215), new java.awt.Color(80, 178, 215), new java.awt.Color(80, 178, 215)));
 
         javax.swing.GroupLayout painelTopoLayout = new javax.swing.GroupLayout(painelTopo);
         painelTopo.setLayout(painelTopoLayout);
@@ -100,6 +102,7 @@ public class Tela_Login extends javax.swing.JFrame {
         txtSenha.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtSenha.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Senha", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(80, 178, 215))); // NOI18N
 
+        checkBox.setBackground(new java.awt.Color(255, 255, 255));
         checkBox.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         checkBox.setForeground(new java.awt.Color(80, 178, 215));
         checkBox.setText("Mostrar Senha");
@@ -134,7 +137,7 @@ public class Tela_Login extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(checkBox, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addComponent(checkBox, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(painelMeioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)

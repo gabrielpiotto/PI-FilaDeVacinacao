@@ -21,24 +21,29 @@ public class Tela_Principal extends javax.swing.JFrame {
      */
     public Tela_Principal(String nivelAcesso, String usuario) {
         initComponents();
-        DefaultTableModel modelo = (DefaultTableModel) tabelaFila.getModel();
+        readTabela();
+        
+        painelTabela.setVisible(false);
+        
         lblNome.setText(usuario);
+        
+        lblNivelAcesso.setText(nivelAcesso);
+        
         if (!nivelAcesso.equals("Administrador")) {
             painelAdm.setVisible(false);
         }
-        tabelaFila.setVisible(false);
-        lblNivelAcesso.setText(nivelAcesso);
+
         readTabela();
     }
 
     public void readTabela() {
         DefaultTableModel modelo = (DefaultTableModel) tabelaFila.getModel();
-
+        modelo.setNumRows(0);
         PessoaDAO pDAO = new PessoaDAO();
 
         try {
             for (Pessoa p : pDAO.read()) {
-                modelo.addRow(new Object[]{ 
+                modelo.addRow(new Object[]{
                     p.getId(),
                     p.getNome(),
                     p.getEndereco(),
@@ -82,6 +87,7 @@ public class Tela_Principal extends javax.swing.JFrame {
         tabelaFila = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Vaccrow");
 
         Fundo.setBackground(new java.awt.Color(80, 178, 215));
 
@@ -125,6 +131,7 @@ public class Tela_Principal extends javax.swing.JFrame {
 
         lblIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gabriel Piotto\\Documents\\NetBeansProjects\\PI-FilaDeVacinacao\\Imagens\\user-128.png")); // NOI18N
+        lblIcon.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(80, 178, 215), new java.awt.Color(80, 178, 215), new java.awt.Color(80, 178, 215), new java.awt.Color(80, 178, 215)));
 
         lblNome.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -162,6 +169,11 @@ public class Tela_Principal extends javax.swing.JFrame {
         });
 
         btnUsuario.setText("Gerenciar Usuarios");
+        btnUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuarioActionPerformed(evt);
+            }
+        });
 
         btnRelatorio.setText("Relatorio");
 
@@ -221,7 +233,15 @@ public class Tela_Principal extends javax.swing.JFrame {
             new String [] {
                 "ID", "Nome", "Endereço", "Idade", "Área Saude", "Data Vacinação"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         painelTabela.setViewportView(tabelaFila);
 
         javax.swing.GroupLayout BaseLayout = new javax.swing.GroupLayout(Base);
@@ -293,11 +313,11 @@ public class Tela_Principal extends javax.swing.JFrame {
     private void btnFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilaActionPerformed
 
         // Visibilidade da fila:
-        if (tabelaFila.isVisible()) {
-            tabelaFila.setVisible(false);
+        if (painelTabela.isVisible()) {
+            painelTabela.setVisible(false);
             btnFila.setText("Mostrar Fila");
         } else {
-            tabelaFila.setVisible(true);
+            painelTabela.setVisible(true);
             btnFila.setText("Ocultar Fila");
         }
     }//GEN-LAST:event_btnFilaActionPerformed
@@ -308,8 +328,12 @@ public class Tela_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPessoaActionPerformed
-        //new Tela_GerenciarPessoas().setVisible(true);
+        new Tela_GerenciarPessoa().setVisible(true);
     }//GEN-LAST:event_btnPessoaActionPerformed
+
+    private void btnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioActionPerformed
+        new Tela_GerenciarUsuario().setVisible(true);
+    }//GEN-LAST:event_btnUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

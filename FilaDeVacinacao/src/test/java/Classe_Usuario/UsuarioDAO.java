@@ -1,6 +1,5 @@
 package Classe_Usuario;
 
-import Classe_Pessoa.Pessoa;
 import Core.ConexaoDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -104,6 +103,8 @@ public class UsuarioDAO {
 
             // 4°..
             pst.setInt(1, usuario.getId());
+            
+            pst.execute();
         }
     }
 

@@ -22,12 +22,21 @@ public class Pessoa {
         this.id = id;
     }
 
-    public Pessoa(String nome, String endereco, String areaSaude, int id, int idade) {
+    public Pessoa(int id ,String nome, String endereco, int idade, String areaSaude) {
         this.nome = nome;
         this.endereco = endereco;
         this.areaSaude = areaSaude;
         this.id = id;
         this.idade = idade;
+    }
+    
+    public Pessoa(int id ,String nome, String endereco, int idade, String areaSaude, String dataVacinacao) {
+        this.nome = nome;
+        this.endereco = endereco;
+        this.areaSaude = areaSaude;
+        this.id = id;
+        this.idade = idade;
+        this.dataVacinacao = dataVacinacao;
     }
 
     /**
