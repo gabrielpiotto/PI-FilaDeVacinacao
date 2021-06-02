@@ -161,7 +161,7 @@ public class PessoaDAO {
     public List<Pessoa> buscarPessoa(Pessoa p) throws Exception {
         String sql = "SELECT id, nome, endereco, idade, areaSaude FROM tb_pessoa";
 
-        List<Pessoa> alunos = new ArrayList<>();
+        List<Pessoa> pessoa = new ArrayList<>();
 
         try (Connection conexao = ConexaoDB.getConexao();
                 PreparedStatement ps = conexao.prepareStatement(sql)) {
@@ -173,10 +173,10 @@ public class PessoaDAO {
                     String endereco = rs.getString("endereco");
                     int idade = rs.getInt("idade");
                     String areaSaude = rs.getString("areaSaude");
-                    alunos.add(new Pessoa(nome, endereco, areaSaude, id, idade));
+                    pessoa.add(new Pessoa(nome, endereco, areaSaude, id, idade));
                 }
             }
         }
-        return alunos;
+        return pessoa;
     }
 }
