@@ -10,6 +10,7 @@ public class Pessoa {
     private String areaSaude;
     private int id;
     private int idade;
+    private int nivelPrioridade;
 
     // Métodos
     /**
@@ -22,21 +23,23 @@ public class Pessoa {
         this.id = id;
     }
 
-    public Pessoa(int id ,String nome, String endereco, int idade, String areaSaude) {
+    public Pessoa(int id ,String nome, String endereco, int idade, String areaSaude, int nivelPrioridade) {
         this.nome = nome;
         this.endereco = endereco;
         this.areaSaude = areaSaude;
         this.id = id;
         this.idade = idade;
+        this.nivelPrioridade = nivelPrioridade;
     }
     
-    public Pessoa(int id ,String nome, String endereco, int idade, String areaSaude, String dataVacinacao) {
+    public Pessoa(int id ,String nome, String endereco, int idade, String areaSaude, String dataVacinacao, int nivelPrioridade) {
         this.nome = nome;
         this.endereco = endereco;
         this.areaSaude = areaSaude;
         this.id = id;
         this.idade = idade;
         this.dataVacinacao = dataVacinacao;
+        this.nivelPrioridade = nivelPrioridade;
     }
 
     /**
@@ -46,13 +49,15 @@ public class Pessoa {
      * @param endereco
      * @param idade
      * @param areaSaude
+     * @param nivelPrioridade
      */
-    public Pessoa(String nome, String endereco, int idade, String areaSaude) {
+    public Pessoa(String nome, String endereco, int idade, String areaSaude, int nivelPrioridade) {
         this.nome = nome;
         this.endereco = endereco;
         this.areaSaude = areaSaude;
         this.idade = idade;
         this.dataVacinacao = null;
+        this.nivelPrioridade = nivelPrioridade;
     }
 
     /**
@@ -63,13 +68,15 @@ public class Pessoa {
      * @param idade
      * @param areaSaude
      * @param dataVacinacao
+     * @param nivelPrioridade
      */
-    public Pessoa(String nome, String endereco, int idade, String areaSaude, String dataVacinacao) {
+    public Pessoa(String nome, String endereco, int idade, String areaSaude, String dataVacinacao, int nivelPrioridade) {
         this.nome = nome;
         this.endereco = endereco;
         this.areaSaude = areaSaude;
         this.idade = idade;
         this.dataVacinacao = dataVacinacao;
+        this.nivelPrioridade = nivelPrioridade;
     }
 
     public String getNome() {
@@ -118,6 +125,14 @@ public class Pessoa {
 
     public void setIdade(int idade) {
         this.idade = idade;
+    }
+    
+    public int getNivelPrioridade  (){
+        return nivelPrioridade;
+    }
+    
+    public void setNivelPrioridade (int nivelPrioridade){
+        this.nivelPrioridade = nivelPrioridade;
     }
 
     @Override

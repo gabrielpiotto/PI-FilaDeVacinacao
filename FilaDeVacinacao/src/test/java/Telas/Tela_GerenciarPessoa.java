@@ -40,7 +40,8 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
                     p.getIdade(),
                     p.getEndereco(),
                     p.getAreaSaude(),
-                    p.getDataVacinacao()
+                    p.getDataVacinacao(),
+                    p.getNivelPrioridade(),
                 });
             }
         } catch (Exception e) {
@@ -75,6 +76,7 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         btnAtualizar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        txtNivelPrioridade = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciar Pessoas");
@@ -114,6 +116,11 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
 
         txtIdade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtIdade.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Idade ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(80, 178, 215))); // NOI18N
+        txtIdade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdadeActionPerformed(evt);
+            }
+        });
 
         txtEndereco.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtEndereco.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Endereço ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(80, 178, 215))); // NOI18N
@@ -124,17 +131,9 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "Idade", "Endereço", "Área da Saúde", "Data de Vacinação"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
+        ));
         tabelaPessoas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelaPessoasMouseClicked(evt);
@@ -144,6 +143,11 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
 
         txtSaude.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtSaude.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Área da Saúde ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(80, 178, 215))); // NOI18N
+        txtSaude.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSaudeActionPerformed(evt);
+            }
+        });
 
         txtData.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtData.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data de Vacinação ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(80, 178, 215))); // NOI18N
@@ -208,8 +212,16 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
                 .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        txtNivelPrioridade.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtNivelPrioridade.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nivel de Prioridade", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(80, 178, 215))); // NOI18N
+        txtNivelPrioridade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNivelPrioridadeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -223,7 +235,8 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
                     .addComponent(txtSaude)
                     .addComponent(txtData)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNome))
+                    .addComponent(txtNome)
+                    .addComponent(txtNivelPrioridade))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
                 .addContainerGap())
@@ -233,7 +246,7 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -245,7 +258,9 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(txtNivelPrioridade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -292,6 +307,7 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
             txtEndereco.setText(tabelaPessoas.getValueAt(tabelaPessoas.getSelectedRow(), 3).toString());
             txtSaude.setText(tabelaPessoas.getValueAt(tabelaPessoas.getSelectedRow(), 4).toString());
             txtData.setText(tabelaPessoas.getValueAt(tabelaPessoas.getSelectedRow(), 5).toString());
+            txtNivelPrioridade.setText(tabelaPessoas.getValueAt(tabelaPessoas.getSelectedRow(), 6).toString());
         }
     }//GEN-LAST:event_tabelaPessoasMouseClicked
 
@@ -308,9 +324,11 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
             int idade = Integer.parseInt(txtIdade.getText());
             String areaSaude = txtSaude.getText();
             String dataVacinacao = txtData.getText();
+            int nivelPrioridade = Integer.parseInt(txtNivelPrioridade.getText());
+            
 
             // Não cadastrar ficha em branco:
-            if (nome.length() == 0 || endereco.length() == 0 || txtIdade.getText().length() == 0 || areaSaude.length() == 0) {
+            if (nome.length() == 0 || endereco.length() == 0 || txtIdade.getText().length() == 0 || areaSaude.length() == 0 ) {
                 JOptionPane.showMessageDialog(this, "Preencha os campos corretamente.");
                 return;
             }
@@ -319,8 +337,8 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Preencha o campo 'Área Saúde' corretamente");
             }
-
-            Pessoa p = new Pessoa(nome, endereco, idade, areaSaude);
+           
+            Pessoa p = new Pessoa(nome, endereco, idade, areaSaude, nivelPrioridade);
             PessoaDAO pDAO = new PessoaDAO();
 
             // Confirmação de Cadastro:
@@ -334,6 +352,7 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
                 txtIdade.setText("");
                 txtSaude.setText("");
                 txtData.setText("");
+                txtNivelPrioridade.setText("");
 
                 readTabela();
                 
@@ -366,9 +385,10 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
                     int idade = Integer.parseInt(txtIdade.getText());
                     String areaSaude = txtSaude.getText();
                     String dataVacinacao = txtData.getText();
+                    int nivelPrioridade = Integer.parseInt(txtNivelPrioridade.getText());
 
                     // Não cadastrar ficha em branco:
-                    if (nome.length() == 0 || endereco.length() == 0 || txtIdade.getText().length() == 0 || areaSaude.length() == 0) {
+                    if (nome.length() == 0 || endereco.length() == 0 || txtIdade.getText().length() == 0 || areaSaude.length() == 0 || txtNivelPrioridade.getText().length() == 0 ) {
                         JOptionPane.showMessageDialog(this, "Preencha os campos corretamente.");
                         return;
                     }
@@ -380,7 +400,7 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
                         return;
                     }
 
-                    Pessoa p = new Pessoa(id, nome, endereco, idade, areaSaude, dataVacinacao);
+                    Pessoa p = new Pessoa(id, nome, endereco, idade, areaSaude, dataVacinacao, nivelPrioridade);
                     PessoaDAO pDAO = new PessoaDAO();
                     pDAO.atualizarPessoa(p);
 
@@ -390,6 +410,7 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
                     txtIdade.setText("");
                     txtSaude.setText("");
                     txtData.setText("");
+                    txtNivelPrioridade.setText("");
 
                     readTabela();
                 }
@@ -423,6 +444,7 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
                     txtIdade.setText("");
                     txtSaude.setText("");
                     txtData.setText("");
+                    txtNivelPrioridade.setText("");
 
                     readTabela();
                 }
@@ -432,6 +454,18 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Problemas tecnicos, tente mais tarde");
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void txtSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSaudeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSaudeActionPerformed
+
+    private void txtNivelPrioridadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNivelPrioridadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNivelPrioridadeActionPerformed
+
+    private void txtIdadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -484,6 +518,7 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtIdade;
+    private javax.swing.JTextField txtNivelPrioridade;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtSaude;
     // End of variables declaration//GEN-END:variables

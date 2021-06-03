@@ -15,7 +15,7 @@ public class PessoaDAO {
     public void cadastrarPessoa(Pessoa pessoa) throws Exception {
 
         // 1° passo: criar comando SQL:
-        String sql = "INSERT INTO tb_pessoa (nome, endereco, idade, areaSaude) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO tb_pessoa (nome, endereco, idade, areaSaude, nivelPrioridade) VALUES (?, ?, ?, ?, ?)";
 
         // 2° passo: abrir uma conexão com o bancode dados:
         try (Connection con = ConexaoDB.getConexao();
@@ -27,6 +27,7 @@ public class PessoaDAO {
             pst.setString(2, pessoa.getEndereco());
             pst.setInt(3, pessoa.getIdade());
             pst.setString(4, pessoa.getAreaSaude());
+            pst.setInt(5, pessoa.getNivelPrioridade());
 
             // 5° passo: executar
             System.out.println("Cadastrando..");
@@ -57,10 +58,11 @@ public class PessoaDAO {
                 String endereco = rs.getString("endereco");
                 String areaSaude = rs.getString("areaSaude");
                 String dataVacinacao = rs.getString("dataVacinacao");
+                int nivelPrioridade = rs.getInt("nivelPrioridade");
 
                 // Formatantdp para exibição:
                 String s = String.format("ID: $d\nNome: %d\nIdade: %d\nEndereço: %s\nArea Saude: %d"
-                        + "\nData de vacinação: %s", id, nome, idade, endereco, areaSaude, dataVacinacao);
+                        + "\nData de vacinação: %s\nNivelPrioridade: %d", id, nome, idade, endereco, areaSaude, dataVacinacao, nivelPrioridade);
                 JOptionPane.showMessageDialog(null, s);
             }
         }
@@ -69,7 +71,7 @@ public class PessoaDAO {
     // UPDATE: Atualiza os registros da tabela 'tb_fila' 
     public void atualizarPessoa(Pessoa pessoa) throws Exception {
         // 1°..
-        String sql = "UPDATE tb_pessoa SET nome = ?, idade = ?, areaSaude = ?, endereco = ?, dataVacinacao = ? WHERE id = ?";
+        String sql = "UPDATE tb_pessoa SET nome = ?, idade = ?, areaSaude = ?, endereco = ?, dataVacinacao = ?, nivelPrioridade = ? WHERE id = ?";
 
         // 2°..
         try (Connection con = ConexaoDB.getConexao();
@@ -83,6 +85,7 @@ public class PessoaDAO {
             pst.setString(4, pessoa.getEndereco());
             pst.setString(5, pessoa.getDataVacinacao());
             pst.setInt(6, pessoa.getId());
+            pst.setInt(7, pessoa.getNivelPrioridade());
 
             // 5°..
             pst.execute();
@@ -112,7 +115,7 @@ public class PessoaDAO {
     public boolean existePessoa(Pessoa pessoa) throws Exception {
 
         // 1° passo: criar comando SQL:
-        String sql = "SELECT * FROM tb_pessoa WHERE nome = ? AND idade = ? AND areaSaude = ? AND endereco = ?";
+        String sql = "SELECT * FROM tb_pessoa WHERE nome = ? AND idade = ? AND areaSaude = ? AND endereco = ? AND nivelPrioridade = ?";
         // Obtendo conexão com o banco de dados
         try (Connection con = ConexaoDB.getConexao();
                 // pré-compilar o comando SQL (Segurança para seu banco de dados):
@@ -149,6 +152,7 @@ public class PessoaDAO {
                     p.setIdade(rs.getInt("idade"));
                     p.setAreaSaude(rs.getString("areaSaude"));
                     p.setDataVacinacao(rs.getString("dataVacinacao"));
+                    p.setNivelPrioridade(rs.getInt("nivelPrioridade"));
                     pessoa.add(p);
                 }
             }

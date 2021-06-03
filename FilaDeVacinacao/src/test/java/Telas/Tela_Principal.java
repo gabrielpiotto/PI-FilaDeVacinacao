@@ -4,6 +4,8 @@ import Classe_Pessoa.Pessoa;
 import Classe_Pessoa.PessoaDAO;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -39,6 +41,7 @@ public class Tela_Principal extends javax.swing.JFrame {
     public void readTabela() {
         DefaultTableModel modelo = (DefaultTableModel) tabelaFila.getModel();
         modelo.setNumRows(0);
+        tabelaFila.setRowSorter(new TableRowSorter<TableModel> (modelo));
         PessoaDAO pDAO = new PessoaDAO();
 
         try {
@@ -49,7 +52,8 @@ public class Tela_Principal extends javax.swing.JFrame {
                     p.getEndereco(),
                     p.getIdade(),
                     p.getAreaSaude(),
-                    p.getDataVacinacao()
+                    p.getDataVacinacao(),
+                    p.getNivelPrioridade(),
                 });
             }
         } catch (Exception e) {
@@ -130,7 +134,6 @@ public class Tela_Principal extends javax.swing.JFrame {
         lblNivelAcesso.setText("Nivel De Acesso");
 
         lblIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gabriel Piotto\\Documents\\NetBeansProjects\\PI-FilaDeVacinacao\\Imagens\\user-128.png")); // NOI18N
         lblIcon.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(80, 178, 215), new java.awt.Color(80, 178, 215), new java.awt.Color(80, 178, 215), new java.awt.Color(80, 178, 215)));
 
         lblNome.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -236,11 +239,11 @@ public class Tela_Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "Endereço", "Idade", "Área Saude", "Data Vacinação"
+                "ID", "Nome", "Endereço", "Idade", "Área Saude", "Data Vacinação", "Nivel de Prioridade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
