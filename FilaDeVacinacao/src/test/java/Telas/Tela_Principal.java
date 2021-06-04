@@ -98,6 +98,11 @@ public class Tela_Principal extends javax.swing.JFrame {
         Base.setBackground(new java.awt.Color(255, 255, 255));
 
         btnVacinar.setText("Vacinar");
+        btnVacinar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVacinarActionPerformed(evt);
+            }
+        });
 
         btnFila.setText("Mostrar Fila");
         btnFila.addActionListener(new java.awt.event.ActionListener() {
@@ -265,8 +270,8 @@ public class Tela_Principal extends javax.swing.JFrame {
                         .addComponent(painelAtendente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(painelAdm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(painelTabela, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(painelTabela, javax.swing.GroupLayout.DEFAULT_SIZE, 854, Short.MAX_VALUE)
+                .addGap(19, 19, 19))
         );
         BaseLayout.setVerticalGroup(
             BaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,6 +353,21 @@ public class Tela_Principal extends javax.swing.JFrame {
     private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
         new Tela_Relatorio().setVisible(true);
     }//GEN-LAST:event_btnRelatorioActionPerformed
+
+    private void btnVacinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVacinarActionPerformed
+        int column = 0;
+        int row = tabelaFila.getSelectedRow();
+        Integer idPessoa = (Integer) tabelaFila.getModel().getValueAt(row, column);   
+        try{
+        
+          new PessoaDAO().vacinarPessoa(idPessoa);
+        }  catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Problemas tecnicos, tente mais tarde");
+        }
+        JOptionPane.showMessageDialog(this, "Pessoa Vacinada");
+      readTabela();
+    }//GEN-LAST:event_btnVacinarActionPerformed
 
     /**
      * @param args the command line arguments
