@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import java.util.Calendar;
+import java.sql.Date;
 
 public class PessoaDAO {
 
@@ -132,10 +134,27 @@ public class PessoaDAO {
             return resultado.next();
         }
     }
+    public void vacinarPessoa(Integer id) throws Exception {
+    
+        String sql = "UPDATE tb_pessoa SET nivelPrioridade = null, dataVacinacao = ? WHERE id = ? ";
+        try (Connection con = ConexaoDB.getConexao();
+                   // pré-compilar o comando SQL (Segurança para seu banco de dados):
+                   PreparedStatement pst = con.prepareStatement(sql)) {
 
+               // Preenchendo os '?':
+                Calendar calendar = Calendar.getInstance();
+                Date hoje = new Date(calendar.getTime().getTime());
+    
+               pst.setDate(1, hoje);
+               pst.setInt(2,id); 
+               pst.executeUpdate();
+
+        }
+
+    }
     public List<Pessoa> read() throws Exception {
 
-        String sql = "SELECT * FROM tb_pessoa";
+        String sql = "SELECT * FROM tb_pessoa ORDER BY -nivelPrioridade DESC";
 
         List<Pessoa> pessoa = new ArrayList<>();
 
