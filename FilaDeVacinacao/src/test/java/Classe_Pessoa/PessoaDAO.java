@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import java.util.Calendar;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class PessoaDAO {
 
@@ -152,6 +153,52 @@ public class PessoaDAO {
         }
 
     }
+    
+    
+     public List<Pessoa> filtrarPessoas(FiltroPessoa fp) throws Exception {
+       
+         String sql = "SELECT * FROM tb_pessoa WHERE idade BETWEEN ? AND ? AND dataVacinacao BETWEEN ? AND ?";
+         
+        try (Connection con = ConexaoDB.getConexao();
+                // 3°..
+                PreparedStatement pst = con.prepareStatement(sql)) {
+
+            // 4°..
+            pst.setInt(1, fp.getIdade()[0]);
+            pst.setInt(2, fp.getIdade()[1]);
+            
+            SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+            java.util.Date date = sdf1.parse(fp.getDataInicio());
+            java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
+            
+            pst.setDate(3, sqlStartDate);
+
+            java.util.Date date1 = sdf1.parse(fp.getDataFinal());
+            java.sql.Date sqlFinalDate = new java.sql.Date(date1.getTime());
+            
+            pst.setDate(4, sqlFinalDate);
+          
+            List<Pessoa> pessoa = new ArrayList<>();
+            System.out.println(pst);
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    Pessoa p = new Pessoa();
+
+                    p.setId(rs.getInt("id"));
+                    p.setNome(rs.getString("nome"));
+                    p.setEndereco(rs.getString("endereco"));
+                    p.setIdade(rs.getInt("idade"));
+                    p.setAreaSaude(rs.getString("areaSaude"));
+                    p.setDataVacinacao(rs.getString("dataVacinacao"));
+                    p.setNivelPrioridade(rs.getInt("nivelPrioridade"));
+                    pessoa.add(p);
+                }
+            }
+        return pessoa;
+        }
+    }
+    
+    
     public List<Pessoa> read() throws Exception {
 
         String sql = "SELECT * FROM tb_pessoa ORDER BY -nivelPrioridade DESC";
