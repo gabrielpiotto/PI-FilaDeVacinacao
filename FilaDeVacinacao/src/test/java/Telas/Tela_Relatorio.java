@@ -1,22 +1,41 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Telas;
 
-/**
- *
- * @author Gabriel Piotto
- */
+import Classe_Pessoa.PessoaDAO;
+import Classe_Pessoa.FiltroPessoa;
+import javax.swing.JOptionPane;
+import java.util.List;
+import Classe_Pessoa.Pessoa;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
+
+
 public class Tela_Relatorio extends javax.swing.JFrame {
 
+    
+    
     /**
      * Creates new form Tela_Relatorio
      */
     public Tela_Relatorio() {
         initComponents();
-    }
+     
+        int[] array1 = new int[2];
+        array1[0] = 0;
+        array1[1] = 49;
+        int[] array2 = new int[2];     
+        array2[0] = 50;
+        array2[1] = 65;
+        
+        int[] array3 = new int[2];    
+        array3[0] = 66;
+        array3[1] = 200;
+        
+        cbIdade.addItem(new ComboItem("Até 49 anos", array1));
+        cbIdade.addItem(new ComboItem("De 50 até 65 anos", array2));
+        cbIdade.addItem(new ComboItem("Acima de 65 anos", array3));
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,9 +51,9 @@ public class Tela_Relatorio extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaFila = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbIdade = new javax.swing.JComboBox<>();
         txtDataInicial = new javax.swing.JFormattedTextField();
         txtDataFinal = new javax.swing.JFormattedTextField();
         jPanel4 = new javax.swing.JPanel();
@@ -71,7 +90,7 @@ public class Tela_Relatorio extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaFila.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -87,16 +106,15 @@ public class Tela_Relatorio extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaFila);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jComboBox1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Até 49 anos", "Entre 50 e 69 anos", "Entre 70 e 80 anos", "Maior ou igual a 90 anos" }));
-        jComboBox1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Idade ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(80, 178, 215))); // NOI18N
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbIdade.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cbIdade.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Idade ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(80, 178, 215))); // NOI18N
+        cbIdade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cbIdadeActionPerformed(evt);
             }
         });
 
@@ -109,6 +127,11 @@ public class Tela_Relatorio extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jButton1.setText("Filtrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -136,7 +159,7 @@ public class Tela_Relatorio extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtDataFinal)
                     .addComponent(txtDataInicial)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbIdade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -144,7 +167,7 @@ public class Tela_Relatorio extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -162,7 +185,7 @@ public class Tela_Relatorio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 886, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -207,10 +230,56 @@ public class Tela_Relatorio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void cbIdadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIdadeActionPerformed
+    // code   
+    }//GEN-LAST:event_cbIdadeActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String oi = txtDataInicial.getText();
+       
+        String hi = txtDataFinal.getText();
+        
+        Object item = cbIdade.getSelectedItem();
+       
+       
+        int[] value = ((ComboItem)item).getValue();
+        
+      
+        
+        FiltroPessoa fp = new FiltroPessoa(oi, hi, value);
+        try{
+           List<Pessoa> pessoasList = new PessoaDAO().filtrarPessoas(fp);
+        readTabela(pessoasList);     
+        }catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Problemas tecnicos, tente mais tarde");
+        }
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
+public void readTabela(List<Pessoa> lista) {
+        DefaultTableModel modelo = (DefaultTableModel) tabelaFila.getModel();
+        modelo.setNumRows(0);
+        tabelaFila.setRowSorter(new TableRowSorter<TableModel> (modelo));
+       
+
+        try {
+            for (Pessoa p : lista) {
+                modelo.addRow(new Object[]{
+                    p.getId(),
+                    p.getNome(),
+                    p.getEndereco(),
+                    p.getIdade(),
+                    p.getAreaSaude(),
+                    p.getDataVacinacao(),
+                    p.getNivelPrioridade(),
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Problemas tecnicos, tente mais tarde");
+        }
+
+    }
     /**
      * @param args the command line arguments
      */
@@ -247,16 +316,16 @@ public class Tela_Relatorio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<ComboItem> cbIdade;
     private javax.swing.JPanel fundo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelaFila;
     private javax.swing.JFormattedTextField txtDataFinal;
     private javax.swing.JFormattedTextField txtDataInicial;
     // End of variables declaration//GEN-END:variables
