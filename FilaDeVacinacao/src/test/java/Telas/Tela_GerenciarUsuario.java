@@ -295,6 +295,7 @@ public class Tela_GerenciarUsuario extends javax.swing.JFrame {
             // Confirmação de Cadastro:
             int escolha = JOptionPane.showConfirmDialog(this, "Deseja mesmo cadastrar o usuario " + txtUsuario.getText() + " ?");
             if (escolha == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(this, "Usuario Cadastrado com Sucesso!");
                 uDAO.cadastrarUsuario(u);
 
                 // Limpar os campos e Atualizando tabela:

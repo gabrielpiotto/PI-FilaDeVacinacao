@@ -131,7 +131,7 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "ID", "Nome", "Idade", "Endereço", "Área Saúde", "Data Vacinação", "Nivel de Prioridade"
             }
         ));
         tabelaPessoas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -344,6 +344,7 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
             // Confirmação de Cadastro:
             int escolha = JOptionPane.showConfirmDialog(this, "Deseja mesmo cadastrar " + txtNome.getText() + " ?");
             if (escolha == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(this, "Pessoa Cadastrada com Sucesso!");
                 pDAO.cadastrarPessoa(p);
 
                 // Limpar os campos e Atualizando tabela:
