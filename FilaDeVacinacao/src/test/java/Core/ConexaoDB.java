@@ -11,7 +11,7 @@ public class ConexaoDB {
     private static String porta = "3306";
     private static String db = "banco_projeto";
     private static String usuario = "root";
-    private static String senha = "159357";
+    private static String senha = "";
 
     /**
      * Obter conexão com o banco de dados

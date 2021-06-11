@@ -20,6 +20,10 @@ package Telas;
         this.value = value;
     }
 
+    ComboItem(String até_49_anos, int resultado1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     @Override
     public String toString()
     {

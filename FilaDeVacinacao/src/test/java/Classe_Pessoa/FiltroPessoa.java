@@ -16,6 +16,10 @@ public class FiltroPessoa {
         this.idade = idade;
     }
 
+    public FiltroPessoa() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getDataInicio() {
         return dataInicio;
     }

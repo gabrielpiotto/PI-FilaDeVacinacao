@@ -60,7 +60,7 @@ public class PessoaDAO {
                 int idade = rs.getInt("idade");
                 String endereco = rs.getString("endereco");
                 String areaSaude = rs.getString("areaSaude");
-                String dataVacinacao = rs.getString("dataVacinacao");
+                Date dataVacinacao = rs.getDate("dataVacinacao");
                 int nivelPrioridade = rs.getInt("nivelPrioridade");
 
                 // Formatantdp para exibição:
@@ -86,7 +86,7 @@ public class PessoaDAO {
             pst.setInt(2, pessoa.getIdade());
             pst.setString(3, pessoa.getAreaSaude());
             pst.setString(4, pessoa.getEndereco());
-            pst.setString(5, pessoa.getDataVacinacao());
+            pst.setDate(5, (Date) pessoa.getDataVacinacao());
             pst.setInt(6, pessoa.getId());
             pst.setInt(7, pessoa.getNivelPrioridade());
 
@@ -189,7 +189,7 @@ public class PessoaDAO {
                     p.setEndereco(rs.getString("endereco"));
                     p.setIdade(rs.getInt("idade"));
                     p.setAreaSaude(rs.getString("areaSaude"));
-                    p.setDataVacinacao(rs.getString("dataVacinacao"));
+                    p.setDataVacinacao(rs.getDate("dataVacinacao"));
                     p.setNivelPrioridade(rs.getInt("nivelPrioridade"));
                     pessoa.add(p);
                 }
@@ -217,7 +217,7 @@ public class PessoaDAO {
                     p.setEndereco(rs.getString("endereco"));
                     p.setIdade(rs.getInt("idade"));
                     p.setAreaSaude(rs.getString("areaSaude"));
-                    p.setDataVacinacao(rs.getString("dataVacinacao"));
+                    p.setDataVacinacao(rs.getDate("dataVacinacao"));
                     p.setNivelPrioridade(rs.getInt("nivelPrioridade"));
                     pessoa.add(p);
                 }

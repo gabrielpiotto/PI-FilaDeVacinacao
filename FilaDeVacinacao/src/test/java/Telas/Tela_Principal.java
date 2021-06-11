@@ -2,6 +2,9 @@ package Telas;
 
 import Classe_Pessoa.Pessoa;
 import Classe_Pessoa.PessoaDAO;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -79,7 +82,6 @@ public class Tela_Principal extends javax.swing.JFrame {
         btnFila = new javax.swing.JButton();
         painelID = new javax.swing.JPanel();
         lblNivelAcesso = new javax.swing.JLabel();
-        lblIcon = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
         painelAdm = new javax.swing.JPanel();
         btnPessoa = new javax.swing.JButton();
@@ -138,10 +140,6 @@ public class Tela_Principal extends javax.swing.JFrame {
         lblNivelAcesso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNivelAcesso.setText("Nivel De Acesso");
 
-        lblIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/user-4-128.png"))); // NOI18N
-        lblIcon.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(80, 178, 215), new java.awt.Color(80, 178, 215), new java.awt.Color(80, 178, 215), new java.awt.Color(80, 178, 215)));
-
         lblNome.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNome.setText("Nome");
@@ -154,8 +152,7 @@ public class Tela_Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(painelIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNivelAcesso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         painelIDLayout.setVerticalGroup(
@@ -163,9 +160,7 @@ public class Tela_Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelIDLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblNivelAcesso)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblIcon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(lblNome)
                 .addContainerGap())
         );
@@ -233,10 +228,10 @@ public class Tela_Principal extends javax.swing.JFrame {
         );
         painelLogoutLayout.setVerticalGroup(
             painelLogoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelLogoutLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLogoutLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         tabelaFila.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -282,7 +277,7 @@ public class Tela_Principal extends javax.swing.JFrame {
                     .addComponent(painelTabela)
                     .addGroup(BaseLayout.createSequentialGroup()
                         .addComponent(painelID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(117, 117, 117)
                         .addComponent(painelLogout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(painelAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -414,7 +409,6 @@ public class Tela_Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnRelatorio;
     private javax.swing.JButton btnUsuario;
     private javax.swing.JButton btnVacinar;
-    private javax.swing.JLabel lblIcon;
     private javax.swing.JLabel lblNivelAcesso;
     private javax.swing.JLabel lblNome;
     private javax.swing.JPanel painelAdm;

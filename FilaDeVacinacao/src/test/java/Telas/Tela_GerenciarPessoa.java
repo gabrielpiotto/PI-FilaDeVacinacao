@@ -4,6 +4,8 @@ import Classe_Pessoa.Pessoa;
 import Classe_Pessoa.PessoaDAO;
 import Classe_Usuario.Usuario;
 import Classe_Usuario.UsuarioDAO;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -379,13 +381,14 @@ public class Tela_GerenciarPessoa extends javax.swing.JFrame {
             int escolha = JOptionPane.showConfirmDialog(this, "Deseja mesmo atualizar " + txtNome.getText() + " ?");
             if (escolha == JOptionPane.YES_OPTION) {
                 if (tabelaPessoas.getSelectedRow() != -1) {
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
                     // Recebendo os dados:
                     int id = (int) tabelaPessoas.getValueAt(tabelaPessoas.getSelectedRow(), 0);
                     String nome = txtNome.getText();
                     String endereco = txtEndereco.getText();
                     int idade = Integer.parseInt(txtIdade.getText());
                     String areaSaude = txtSaude.getText();
-                    String dataVacinacao = txtData.getText();
+                    Date dataVacinacao = sdf1.parse(txtData.getText());
                     int nivelPrioridade = Integer.parseInt(txtNivelPrioridade.getText());
 
                     // Não cadastrar ficha em branco:

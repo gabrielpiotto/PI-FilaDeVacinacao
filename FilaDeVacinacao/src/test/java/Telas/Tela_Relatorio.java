@@ -1,14 +1,18 @@
 package Telas;
 
+
 import Classe_Pessoa.PessoaDAO;
 import Classe_Pessoa.FiltroPessoa;
 import javax.swing.JOptionPane;
 import java.util.List;
 import Classe_Pessoa.Pessoa;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Tela_Relatorio extends javax.swing.JFrame {
@@ -31,10 +35,77 @@ public class Tela_Relatorio extends javax.swing.JFrame {
         int[] array3 = new int[2];    
         array3[0] = 66;
         array3[1] = 200;
-        
-        cbIdade.addItem(new ComboItem("Até 49 anos", array1));
+        cbIdade.addItem(new ComboItem("Até 49 anos", array1 ));
         cbIdade.addItem(new ComboItem("De 50 até 65 anos", array2));
         cbIdade.addItem(new ComboItem("Acima de 65 anos", array3));
+    }
+    private void  relatorio1() throws ParseException {
+        
+        int[] array1 = new int[2];
+        array1[0] = 0;
+        array1[1] = 49;
+        int[] array2 = new int[2];     
+        array2[0] = 50;
+        array2[1] = 65;
+        
+        int[] array3 = new int[2];    
+        array3[0] = 66;
+        array3[1] = 200;
+
+        //pegando quantidade de elementos dos vetores
+       int total1 =  array1.length;
+       
+       int total2 =  array1.length;
+       
+       int total3 =  array1.length;
+       
+         
+       
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date date, date1;
+        date = sdf1.parse(txtDataInicial.getText());
+        
+        date1 = sdf1.parse(txtDataFinal.getText());
+        Calendar startCale = new GregorianCalendar();
+        Calendar endCal = new GregorianCalendar();
+        long startDate = 0;
+
+        date.setTime(startDate);
+        Date endDate = null;
+        endCal.setTime(endDate);
+
+        endCal.add(Calendar.YEAR, -startCal.get(Calendar.YEAR));
+        endCal.add(Calendar.MONTH, -startCal.get(Calendar.MONTH));
+        endCal.add(Calendar.DAY_OF_MONTH, -startCal.get(Calendar.DAY_OF_MONTH));
+        
+         FiltroPessoa fp = new FiltroPessoa();
+        try{
+           List<Pessoa> pessoasList = new PessoaDAO().filtrarPessoas(fp);
+           
+             
+        }catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Problemas tecnicos, tente mais tarde");
+        }
+
+        int daysDifference = endCal.get(Calendar.DAY_OF_YEAR);
+        
+  
+        
+        int resultado1;
+        
+        int resultado2;
+        
+        int resultado3;
+       
+       resultado1 = total1/daysDifference;
+       resultado2 = total2/daysDifference;
+       resultado3 = total3/daysDifference;
+       
+       int relatorio;
+       relatorio = Integer.parseInt(null, resultado1, resultado2, resultado3);
+       JOptionPane.showMessageDialog(null,"A media de vacinação é" + relatorio);
+     
    }
 
     /**
@@ -50,15 +121,13 @@ public class Tela_Relatorio extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaFila = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         cbIdade = new javax.swing.JComboBox<>();
         txtDataInicial = new javax.swing.JFormattedTextField();
-        txtDataFinal = new javax.swing.JFormattedTextField();
         jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        txtDataFinal = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Relatório");
@@ -92,27 +161,8 @@ public class Tela_Relatorio extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tabelaFila.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Nome", "Idade", "Endereço", "Área da Saúde", "Data de Vacinação"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tabelaFila);
-
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        cbIdade.setBackground(new java.awt.Color(255, 255, 255));
         cbIdade.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         cbIdade.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Idade ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(80, 178, 215))); // NOI18N
         cbIdade.addActionListener(new java.awt.event.ActionListener() {
@@ -123,9 +173,11 @@ public class Tela_Relatorio extends javax.swing.JFrame {
 
         txtDataInicial.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Inicial", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(80, 178, 215))); // NOI18N
         txtDataInicial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-
-        txtDataFinal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Final", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(80, 178, 215))); // NOI18N
-        txtDataFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        txtDataInicial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDataInicialActionPerformed(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -143,25 +195,28 @@ public class Tela_Relatorio extends javax.swing.JFrame {
             }
         });
 
+        txtDataFinal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Final", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(80, 178, 215))); // NOI18N
+        txtDataFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)
+            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addComponent(txtDataFinal))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(58, 58, 58)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(33, 33, 33))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -169,24 +224,23 @@ public class Tela_Relatorio extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtDataFinal)
-                    .addComponent(txtDataInicial)
-                    .addComponent(cbIdade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbIdade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtDataInicial, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cbIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(44, 44, 44)
                 .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -198,18 +252,14 @@ public class Tela_Relatorio extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 886, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -245,6 +295,7 @@ public class Tela_Relatorio extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void cbIdadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIdadeActionPerformed
     // code   
     }//GEN-LAST:event_cbIdadeActionPerformed
@@ -257,14 +308,19 @@ public class Tela_Relatorio extends javax.swing.JFrame {
         Object item = cbIdade.getSelectedItem();
        
        
+       
         int[] value = ((ComboItem)item).getValue();
-        
+        // pegar o numero de siar entre as datas
+       
       
+        
+        
         
         FiltroPessoa fp = new FiltroPessoa(oi, hi, value);
         try{
            List<Pessoa> pessoasList = new PessoaDAO().filtrarPessoas(fp);
-        readTabela(pessoasList);     
+           
+             
         }catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Problemas tecnicos, tente mais tarde");
@@ -275,30 +331,12 @@ public class Tela_Relatorio extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-public void readTabela(List<Pessoa> lista) {
-        DefaultTableModel modelo = (DefaultTableModel) tabelaFila.getModel();
-        modelo.setNumRows(0);
-        tabelaFila.setRowSorter(new TableRowSorter<TableModel> (modelo));
+
+    private void txtDataInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataInicialActionPerformed
+        // TODO add your handling code here:
        
+    }//GEN-LAST:event_txtDataInicialActionPerformed
 
-        try {
-            for (Pessoa p : lista) {
-                modelo.addRow(new Object[]{
-                    p.getId(),
-                    p.getNome(),
-                    p.getEndereco(),
-                    p.getIdade(),
-                    p.getAreaSaude(),
-                    p.getDataVacinacao(),
-                    p.getNivelPrioridade(),
-                });
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Problemas tecnicos, tente mais tarde");
-        }
-
-    }
     /**
      * @param args the command line arguments
      */
@@ -344,9 +382,19 @@ public void readTabela(List<Pessoa> lista) {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaFila;
     private javax.swing.JFormattedTextField txtDataFinal;
     private javax.swing.JFormattedTextField txtDataInicial;
     // End of variables declaration//GEN-END:variables
+
+    private static class startCal {
+
+        private static int get(int YEAR) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        public startCal() {
+        }
+    }
+
+    
 }

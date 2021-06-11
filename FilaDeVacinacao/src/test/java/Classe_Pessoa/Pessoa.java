@@ -1,12 +1,14 @@
 package Classe_Pessoa;
 
+import java.util.Date;
+
 
 public class Pessoa {
 
     // Atributos
     private String nome;
     private String endereco;
-    private String dataVacinacao;
+    private Date dataVacinacao;
     private String areaSaude;
     private int id;
     private int idade;
@@ -32,7 +34,7 @@ public class Pessoa {
         this.nivelPrioridade = nivelPrioridade;
     }
     
-    public Pessoa(int id ,String nome, String endereco, int idade, String areaSaude, String dataVacinacao, int nivelPrioridade) {
+    public Pessoa(int id ,String nome, String endereco, int idade, String areaSaude, Date dataVacinacao, int nivelPrioridade) {
         this.nome = nome;
         this.endereco = endereco;
         this.areaSaude = areaSaude;
@@ -70,7 +72,7 @@ public class Pessoa {
      * @param dataVacinacao
      * @param nivelPrioridade
      */
-    public Pessoa(String nome, String endereco, int idade, String areaSaude, String dataVacinacao, int nivelPrioridade) {
+    public Pessoa(String nome, String endereco, int idade, String areaSaude, Date dataVacinacao, int nivelPrioridade) {
         this.nome = nome;
         this.endereco = endereco;
         this.areaSaude = areaSaude;
@@ -111,11 +113,11 @@ public class Pessoa {
         this.areaSaude = areaSaude;
     }
 
-    public String getDataVacinacao() {
+    public Date getDataVacinacao() {
         return dataVacinacao;
     }
 
-    public void setDataVacinacao(String dataVacinacao) {
+    public void setDataVacinacao(Date dataVacinacao) {
         this.dataVacinacao = dataVacinacao;
     }
 
